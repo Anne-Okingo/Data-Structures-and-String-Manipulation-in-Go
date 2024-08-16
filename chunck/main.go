@@ -35,59 +35,6 @@
 // [[0 1 2 3] [4 5 6 7]]
 // $
 
-// package main
-
-// import (
-// 	"fmt"
-// 	// "github.com/01-edu/z01"
-// )
-// func Chunk(slice []int, size int) {
-// 	if size == 0 {
-// 		fmt.Println()
-// 		return
-// 	}
-// 	if len(slice) == 0 {
-// 		fmt.Println([]int{})
-// 		return
-// 	}
-
-// 	var chucked [][]int
-// 	for i := 0; i < len(slice); i = i + size {
-// 		final := i + size
-// 		if final > len(slice){
-// 			final = len(slice)
-// 		}
-// 		chucked = append(chucked, slice[i:final])
-// 	}
-// 	fmt.Println(chucked)
-// }
-// package main
-
-// import(
-// "fmt"
-// )
-
-// func Chunk(slice []int, size int){
-// 	if size == 0{
-// 		fmt.Println()
-// 		return
-// 	}
-
-// 	if len(slice) == 0{
-// 		fmt.Println([]int{})
-// 		return
-// 	}
-// 	// chuncks := []int{}
-// 	result := [][]int{}
-// 	for i := 0; i < len(slice); i = i + size{
-// 		final := i + size
-// 		if final > len(slice){
-// 			final = len(slice)
-// 		}
-// 		result = append(result, slice[i:final])
-// 	}
-// 	fmt.Println(result)
-// }
 
 package main
 
@@ -95,51 +42,14 @@ import (
 	"fmt"
 )
 
-// func Chunk(slice []int, size int){
-// 	if len(slice) == 0 {
-// 		fmt.Println([]int{})
-// 		return
-// 	}
-
-// 	if size == 0{
-// 		fmt.Println()
-// 		return
-// 	}
-
-// 	result := [][]int{}
-// 	for i := 0; i < len(slice); i += size{
-// 		final := i + size
-// 	if final > len(slice){
-// 		final = len(slice)
-// 	}
-// 	result = append(result, slice[i:final])
-// }
-// fmt.Println(result)
-// result := [][]int{}
-
-// 	for i := 0;i < len(slice); i = i + size{
-// 		final := i + size
-// 		if final > len(slice){
-// 			final = len(slice)
-// 		}
-// 		result = append(result, slice[i:final])
-// 	}
-// 	fmt.Println(result)
-// }
-
-// func Chunk (slice []int, size int){
-// 	result := [][]int{}
-
-// 	for i := 0;i < len(slice); i = i + size{
-// 		final := i + size
-// 		if final > len(slice){
-// 			final = len(slice)
-// 		}
-// 		result = append(result, slice[i:final])
-// 	}
-// 	fmt.Println(result)
-// }
-
+func main() {
+	Chunk([]int{}, 10)
+	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 0)
+	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 3)
+	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 5)
+	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 4)
+	Chunk([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3)
+}
 func Chunk(slice []int, size int){
 	if size == 0 {
 		fmt.Println()
@@ -160,11 +70,3 @@ func Chunk(slice []int, size int){
 	fmt.Println(chunked) 
 }
 
-func main() {
-	Chunk([]int{}, 10)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 0)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 3)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 5)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 4)
-	// Chunk([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3)
-}
