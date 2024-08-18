@@ -66,7 +66,9 @@ func main() {
 	fmt.Println(CamelToSnakeCase("CAMELtoSnackCASE"))
 	fmt.Println(CamelToSnakeCase("camelToSnakeCase"))
 	fmt.Println(CamelToSnakeCase("hey2"))
+	fmt.Println(CamelToSnakeCase("AbC"))
 	fmt.Println(CamelToSnakeCase("123"))
+	fmt.Println(CamelToSnakeCase("CamelTing1"))
 }
 
 
@@ -78,6 +80,9 @@ func CamelToSnakeCase(str string) string {
 	result := ""
 	for i := 0; i < len(str); i++ {
 		if str[i] >= 'A' && str[i] <= 'Z' && i == len(str)-1 || str[i] >= 'A' && str[i] <= 'Z' && str[i+1] >= 'A' && str[i+1] <= 'Z' {
+			return str
+		}
+		if !((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')){
 			return str
 		}
 		if i != len(str)-1 && (str[i] >= 'a' && str[i] <= 'z') && (str[i+1] >= 'A' && str[i+1] <= 'Z') {
