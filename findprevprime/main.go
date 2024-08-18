@@ -9,39 +9,8 @@ package main
 import (
 	"fmt"
 
-	// "golang.org/x/text/number"
 )
 
-// func IsPrime(nb int) bool {
-// 	if nb < 2 {
-// 		return false
-// 	}
-// 	for i := 2; i < nb; i++ {
-// 		if nb%i == 0 {
-// 			return false
-// 		}
-// 	}
-// 	return true
-// }
-
-// func IsPrime(nb int)bool{
-// 	if nb < 2{
-// 		return false
-// 	}
-// 	for i := 2; i < nb; i++{
-// 		if nb % i == 0{
-// 			return false
-// 		}
-// 	}
-// 	return true
-// }
-
-// func FindPrevPrime(num int) int {
-// 	if !IsPrime(num) {
-// 		num--
-// 	}
-//     return num
-// }
 
 func main() {
 	fmt.Println(FindPrevPrime(18))
