@@ -86,26 +86,26 @@ func main() {
 }
 
 func CanJump(nb []uint)bool{
-	if len(nb) == 0{
+	if len(nb)== 0{
 		return false
 	}
-	if len(nb) == 1{
+	if len(nb)== 1{
 		return true
 	}
-
 	sum := 0
-	for i := 0; i < len(nb) ; i++{
+
+	for i := 0; i < len(nb); i++{
 		sum += int(nb[i])
 	}
 	if sum == 0{
 		return true
 	}else{
-		for i := 0; i < len(nb)-1;{
+		for i:= 0; i < len(nb); {
 			start := int(nb[i])
 			if start == 0{
 				return false
 			}
-			i += start
+			i+=start
 			if i == len(nb)-1{
 				return true
 			}
