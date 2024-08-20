@@ -75,12 +75,12 @@ func Itoa(n int) string {
 	sign := ""
 	if n < 0 {
 		sign = "-"
-		n = -n
+		n = n * -1
 	}
 
 	result := ""
 	for n > 0 {
-		result = string(n%10 + '0')
+		result = string(n%10 + '0') + result
 		n /= 10
 	}
 	return sign + result
