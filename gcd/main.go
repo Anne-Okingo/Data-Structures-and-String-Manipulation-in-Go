@@ -30,35 +30,45 @@ import(
 )
 
 func main(){
-	args := os.Args
-
-	args1 := Atoi(args[1])
-	args2 := Atoi(args[2])
-
-	for args2 != 0{
-		args1 , args2 = args2 , args1 % args2
+	if len(os.Args) != 3{
+		return
 	}
-	fmt.Println(args1)
+	s1, s2 := os.Args[1],os.Args[2]
+
+	n1, n2 := Atoi(s1), Atoi(s2)
+
+	for n2 != 0{
+		n1,n2 = n2, n1%n2
+	}
+	fmt.Println(n1)
+
+	// fmt.Println(Atoi("254"))
 
 }
 
-func Atoi(str string)int{
+func Atoi(s string)int{
 	multiplier := 1
-	for i := 0; i < len(str); i++{
-		if str[i] == '-'{
+	result := 0
+	for i, ch := range s{
+		if ch == '-' && i == 0{
 			multiplier = -1
-			str = str[i:]
-		}else if str[i] == '+'{
+			s = s[1:]
+			continue
+		}
+		if ch == '+' && i == 0{
 			multiplier = 1
-			str = str[i:]
+			s= s[1:]
+			continue
 		}
 	}
-
-	result := 0
-
-	for _, ch := range str{
-		result = result * 10 + int(ch -'0')
+	for  _, ch := range s{
+		if ch < '0' || ch > '9'{
+			continue
+		}else{
+			result = result * 10 + int(ch - '0')
+		}
 	}
-	return result * multiplier
+	return  result * multiplier
 }
+
 
