@@ -53,32 +53,29 @@ func main() {
 }
 
 func FifthAndSkip(str string) string {
-	if str == ""{
-		return "\n"
+if str == ""{
+	return "\n"
+}
+if len(str) < 5{
+	return "Invalid Input" + "\n"
+}
+words := ""
+for _, ch := range str{
+	if ch != ' '{
+		words += string(ch)
 	}
-	if len(str) < 5{
-		return"Invalid Input" + "\n"
+}
+result := ""
+for i := 0; i < len(words); i+=5{
+	start := i+5
+	if start > len(words){
+		result += string(words[i :len(words)])
+	}else{
+		result += string(words[i:start]) + " "
 	}
-
-	words := ""
-	for _, ch := range str{
-		if ch == ' '{
-			continue
-		}else{
-			words += string(ch)
-		}
-	}
-	// fmt.Println(words)
-	result := ""
-	for i := 0; i <= len(words)-1; i+=5{
-		if i + 5 > len(words){
-			result += string(words[i:])
-		}else{
-			result += words[i:i+5] + " "
-		}
-		i++
-	}
-	return result + "\n"
+	i++
+}
+return result + "\n"
 
 	}
 
