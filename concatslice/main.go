@@ -32,17 +32,27 @@ package main
 
 import (
 	"fmt"
+	// "strconv"
 )
 
 func main() {
 	fmt.Println(ConcatSlice([]int{1, 2, 3}, []int{4, 5, 6}))
 	fmt.Println(ConcatSlice([]int{}, []int{4, 5, 6, 7, 8, 9}))
 	fmt.Println(ConcatSlice([]int{1, 2, 3}, []int{}))
+	fmt.Println(ConcatSlice([]int{}, []int{}))
 	// fmt.Println(Atoi("254"))
 }
 
-func ConcatSlice(slice1, slice2 []int) []int {
-	return append(slice1, slice2...)
+func ConcatSlice(s1,s2 []int)[]int{
+	// if s1 == nil && s2 == nil{
+	// 	return nil
+	// }else{
+	// 	return append(s1,s2...)
+	// }
+	sliced := make([]int,len(s1) + len(s2))
+	copy(sliced,s1)
+	copy(sliced[len(s1):], s2)
+	return sliced
 }
 
 // func ConcatSlice(s1, s2 []int) []int{
@@ -66,23 +76,23 @@ func ConcatSlice(slice1, slice2 []int) []int {
 
 // }
 
-func Atoi(s string) int {
-	multi := 1
-	result := 0
-	for i := range s {
-		if s[0] == '-' {
-			multi = -1
-			s = s[i:]
-			continue
-		}
-		if s[0] == '+' {
-			multi = 1
-			s = s[i:]
-			continue
-		}
-	}
-	for _, ch := range s {
-		result = result*10 + int(ch-'0')
-	}
-	return multi * result
-}
+// func Atoi(s string) int {
+// 	multi := 1
+// 	result := 0
+// 	for i := range s {
+// 		if s[0] == '-' {
+// 			multi = -1
+// 			s = s[i:]
+// 			continue
+// 		}
+// 		if s[0] == '+' {
+// 			multi = 1
+// 			s = s[i:]
+// 			continue
+// 		}
+// 	}
+// 	for _, ch := range s {
+// 		result = result*10 + int(ch-'0')
+// 	}
+// 	return multi * result
+// }

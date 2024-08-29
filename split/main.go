@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	// "piscine"
 )
 
@@ -32,6 +33,7 @@ func Split(s, sep string) []string {
 	}
 
 return result
+
 }
 
 

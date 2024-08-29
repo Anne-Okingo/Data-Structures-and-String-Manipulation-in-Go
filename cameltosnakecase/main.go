@@ -62,6 +62,15 @@ import (
 func main() {
 	fmt.Println(CamelToSnakeCase("HelloWorld"))
 	fmt.Println(CamelToSnakeCase("helloWorld"))
+	// fmt.Println(CamelToSnakeCase("camelCase"))
+	// fmt.Println(CamelToSnakeCase("CAMELtoSnackCASE"))
+	// fmt.Println(CamelToSnakeCase("camelToSnakeCase"))
+	// fmt.Println(CamelToSnakeCase("hey2"))
+	// fmt.Println(CamelToSnakeCase("AbC"))
+	// fmt.Println(CamelToSnakeCase("123"))
+	// fmt.Println(CamelToSnakeCase("CamelTing1"))
+	// CamelToSnakeCase("HelloWorld")
+	// CamelToSnakeCase("helloWorld")
 	fmt.Println(CamelToSnakeCase("camelCase"))
 	fmt.Println(CamelToSnakeCase("CAMELtoSnackCASE"))
 	fmt.Println(CamelToSnakeCase("camelToSnakeCase"))
@@ -71,27 +80,22 @@ func main() {
 	fmt.Println(CamelToSnakeCase("CamelTing1"))
 }
 
-
-
 func CamelToSnakeCase(str string) string {
 	if str == "" {
 		return ""
 	}
 	result := ""
 	for i := 0; i < len(str); i++ {
-		if str[i] >= 'A' && str[i] <= 'Z' && i == len(str)-1 || str[i] >= 'A' && str[i] <= 'Z' && str[i+1] >= 'A' && str[i+1] <= 'Z' {
+		if (i == len(str)-1 && str[i] >= 'A' && str[i] <= 'Z') || str[i] >= 'A' && str[i] <= 'Z' && str[i+1] >= 'A' && str[i+1] <= 'Z' {
 			return str
 		}
-		if !((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')){
+		if !(str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z') {
 			return str
-		}
-		if i != len(str)-1 && (str[i] >= 'a' && str[i] <= 'z') && (str[i+1] >= 'A' && str[i+1] <= 'Z') {
-			result = result + string(str[i]) + "_"
-		}else{
-			result = result + string(str[i])
+		} else if i != len(str)-1 && str[i] >= 'a' && str[i] <= 'z' && str[i+1] >= 'A' && str[i+1] <= 'Z' {
+			result += string(str[i]) + "_"
+		} else {
+			result += string(str[i])
 		}
 	}
 	return result
 }
-		
-

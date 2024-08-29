@@ -55,10 +55,6 @@ func IsPrime(num int)bool{
 		return false
 	}
 
-	// if num == 2 {
-	// 	return true
-	// }
-
 	for i := 2; i <= num/2; i++{
 		if num % i == 0 {
 			return false
