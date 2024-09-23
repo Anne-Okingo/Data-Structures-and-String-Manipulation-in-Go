@@ -56,47 +56,56 @@ func main() {
 	challenge.Function("PrintMemory", PrintMemory, solutions.PrintMemory, table2)
 }
 
-func Hex(nb int) {
-	hex := "0123456789abcdef"
-
-	result := ""
-	if nb == 0 {
-		result += "00"
+func PrintMemory(arr [10]byte){
+	result := []string{}
+	for _, ch := range arr{
+		if ch == 0{
+			result = append(result, "00")
+		}else{
+			result = append(result, (Hex(int(ch))))
+		}
 	}
-	for nb > 0 {
-		reminder := nb % 16
-		result = string(hex[reminder]) + result
-		nb = nb / 16
-	}
-	if len(result) == 1 {
-		result = "0" + result
-	}
-	Ps(result)
-}
-
-func PrintMemory(arr [10]byte) {
-	for i, ch := range arr {
-		Hex(int(ch))
-		if i == 3 || i == 7 || i == 9 {
+	for i := 0; i < len(result);i++{
+		PrintS(result[i])
+		if i == 3 || i == 7 || i == 9{
 			z01.PrintRune('\n')
-		} else {
+		}else if i < len(result) -1{
 			z01.PrintRune(' ')
 		}
 	}
-	res := ""
-	for _, ch := range arr {
-		if ch >= 32 && ch <= 126 {
-			res += string(ch)
-		} else {
-			res += "."
+
+	for _, ch := range arr{
+		if ch > 32 && ch <= 126{
+			z01.PrintRune(rune(ch))
+		}else{
+			z01.PrintRune('.')
 		}
 	}
-	Ps(res)
 	z01.PrintRune('\n')
 }
 
-func Ps(str string) {
-	for _, ch := range str {
+func PrintS(s string){
+	for _, ch := range s{
 		z01.PrintRune(ch)
 	}
+
+}
+
+func Hex(n int)string{
+	hex := "0123456789abcdef"
+	result := ""
+
+	if n  == 0{
+		return "0"
+	}
+
+	for n > 0{
+		remainder := n%16
+		result = string(hex[remainder]) + result
+		n /= 16
+	}
+	if len(result) == 1{
+		result = "0" + result
+	}
+	return result
 }
