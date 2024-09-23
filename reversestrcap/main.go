@@ -20,41 +20,50 @@ package main
 import (
 	"fmt"
 	"os"
+	// "github.com/01-edu/z01"
 )
 
 func main() {
-	// if len(os.Args)!= 2{
-	// 	return
-	// }
-	slice := os.Args[1:]
-	result2 := ""
-	for i := 0; i < len(slice); i++ {
-		sliced := Tolower(string(slice[i]))
-		// fmt.Println(sliced)
+	if len(os.Args) < 1 {
+		return
+	}
 
-		for i, ch := range sliced {
-			if ch >= 'a' && ch <= 'z' {
-				if (i < len(sliced)-1 && sliced[i+1] == ' ') || i == len(sliced)-1 {
-					result2 += string(sliced[i] - 32) + " "
-				} else {
-					result2 += string(sliced[i])
-				}
+	args := os.Args[1:]
+	// res := ""
+
+	for _, str := range args {
+		fmt.Println(RevStrCap(str))
+	}
+	// fmt.Println(res)
+}
+
+func RevStrCap(s string) string {
+	result := ""
+	for i, c := range s {
+		if i != len(s)-1 {
+			if Up(c) && s[i+1] != ' ' {
+				result += string(c + 32)
+			} else if Low(c) && s[i+1] == ' ' {
+				result += string(c - 32)
+			} else {
+				result += string(c)
+			}
+		} else {
+			if i == len(s)-1 && Low(c) {
+				result += string(c - 32)
+			} else {
+				result += string(c)
 			}
 		}
 	}
-	fmt.Println(result2)
+
+	return result
 }
 
-// fmt.Println(Tolower("First SMALL TesT"))
+func Low(s rune) bool {
+	return s >= 'a' && s <= 'z'
+}
 
-func Tolower(str string) string {
-	result := ""
-	for _, ch := range str {
-		if ch >= 'A' && ch <= 'Z' {
-			result += string(ch + 32)
-		} else {
-			result += string(ch)
-		}
-	}
-	return result
+func Up(s rune) bool {
+	return s >= 'A' && s <= 'Z'
 }
