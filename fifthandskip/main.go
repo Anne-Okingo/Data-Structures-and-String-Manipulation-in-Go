@@ -46,10 +46,11 @@ import (
 )
 
 func main() {
-	fmt.Print(FifthAndSkip("abcdefghijklmnopqrstuwxyz"))
+	fmt.Print(FifthAndSkip("abcd efghijklmnopqrstuwxyz"))
 	fmt.Print(FifthAndSkip("This is a short sentence"))
 	fmt.Print(FifthAndSkip("1234"))
-	// FifthAndSkip("This is a short sentence")
+
+	fmt.Print(FifthAndSkip("e5£jhy@a*7=56;"))
 }
 
 func FifthAndSkip(str string) string {
@@ -66,17 +67,16 @@ for _, ch := range str{
 	}
 }
 result := ""
-for i := 0; i < len(words); i+=5{
+for i := 0; i < len(words);i+=5{
 	start := i+5
 	if start > len(words){
-		result += string(words[i :len(words)])
+		result += string(words[i:])
 	}else{
 		result += string(words[i:start]) + " "
 	}
 	i++
 }
 return result + "\n"
-
 	}
 
 
