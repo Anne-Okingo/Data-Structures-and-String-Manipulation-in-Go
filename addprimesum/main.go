@@ -98,12 +98,13 @@ func IsPrime(n int) bool {
 	return true
 }
 
-func PrimeSum(n int)int{
-	sum := 0
-	for i := 0;i < n; i++{
-		if IsPrime(i){
-			sum +=i
+	func PrimeSum(n int)int{
+		sum := 0
+		for i := 0;i < n; i++{
+			if IsPrime(i){
+				sum +=i
+			}
 		}
+		return sum
 	}
-	return sum
-}
+
