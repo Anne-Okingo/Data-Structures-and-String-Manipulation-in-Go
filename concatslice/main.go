@@ -44,15 +44,15 @@ func main() {
 }
 
 func ConcatSlice(s1,s2 []int)[]int{
-	// if s1 == nil && s2 == nil{
-	// 	return nil
-	// }else{
-	// 	return append(s1,s2...)
-	// }
-	sliced := make([]int,len(s1) + len(s2))
-	copy(sliced,s1)
-	copy(sliced[len(s1):], s2)
-	return sliced
+	if s1 == nil && s2 == nil{
+		return nil
+	}else{
+		return append(s1,s2...)
+	}
+	// sliced := make([]int,len(s1) + len(s2))
+	// copy(sliced,s1)
+	// copy(sliced[len(s1):], s2)
+	// return sliced
 }
 
 // func ConcatSlice(s1, s2 []int) []int{
