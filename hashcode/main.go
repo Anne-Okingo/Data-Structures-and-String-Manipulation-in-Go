@@ -60,10 +60,23 @@ func HashCode(dec string) string {
 	for i, ch := range dec{
 		result = (int(ch) +lend) % 127
 
-		if result < 0 || result > 127{
+		if result < 32|| result > 126{
 			result = result + 33
 		}
 		mapped[i] = rune(result)
 	}
 	return string(mapped)
 }
+// func HashCode(dec string) string {
+// 	lend := len(dec)
+// 	hashed := ""
+// 	calc := 0
+// 	for _, ch := range dec{
+// 		calc = (int(ch) + lend) % 127
+// 		if calc < 32 || calc > 126{
+// 			calc += 33
+// 		}
+// 		hashed += string(calc)
+// 	}
+// return hashed
+// }
