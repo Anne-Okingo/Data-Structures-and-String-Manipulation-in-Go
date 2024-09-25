@@ -38,40 +38,50 @@
 // [4 1 5 2 6 3 7 8 9]
 // [1 2 3]
 
-
 package main
 
 import (
-	"fmt"
+	"github.com/01-edu/go-tests/lib/challenge"
+	"github.com/01-edu/go-tests/solutions"
 )
 
-func main() {
-	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))
-	fmt.Println(ConcatAlternate([]int{2, 4, 6, 8, 10}, []int{1, 3, 5, 7, 9, 11}))
-	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))
-	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{}))
+// func main() {
+// 	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))
+// 	fmt.Println(ConcatAlternate([]int{2, 4, 6, 8, 10}, []int{1, 3, 5, 7, 9, 11}))
+// 	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))
+// 	fmt.Println(ConcatAlternate([]int{1, 2, 3}, []int{}))
+// }
+
+func ConcatAlternate(s1, s2 []int) []int {
+	sliced := []int{}
+	if len(s1) == 0 && len(s2) == 0 {
+		return []int(nil)
+	}
+
+	if len(s1) < len(s2){
+		s1,s2 =s2,s1
+	}
+
+	for i, n := range s1{
+		sliced = append(sliced,n)
+
+		if i < len(s2){
+			sliced = append(sliced,s2[i])
+		}
+	}
+	return sliced
 }
 
-func ConcatAlternate(s1,s2 []int) []int {
-	sliced := []int{}
-	if len(s2) == 0{
-		sliced = append(sliced, s1...)
+func main() {
+	args := [][][]int{
+		{{1, 2, 3}, {4, 5, 6}},
+		{{1, 2, 3}, {4, 5}},
+		{{}, {4, 5, 6}},
+		{{1, 2, 3}, {}},
+		{{}, {}},
+		{{1, 2, 4}, {10, 20, 30, 40, 50}},
 	}
-	if len(s1) == 0{
-		sliced = append(sliced,s2...)
+	for _, arg := range args {
+		challenge.Function("ConcatAlternate", ConcatAlternate, solutions.ConcatAlternate, arg[0], arg[1])
 	}
-	if len(s1) == len(s2){
-		for i := 0;i < len(s1);i++{
-			sliced = append(sliced,s1[i])
-			sliced = append(sliced,s2[i])
-		}
-	}
-	if len(s2) > len(s1){
-		for i := 0; i < len(s1); i++{
-			sliced = append(sliced,s2[i])
-			sliced = append(sliced,s1[i])
-		}
-		sliced = append(sliced,s2[len(s1):]...)
-	}
-return sliced
 }
