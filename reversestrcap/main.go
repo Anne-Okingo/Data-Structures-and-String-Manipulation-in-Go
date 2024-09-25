@@ -22,48 +22,41 @@ import (
 	"os"
 	// "github.com/01-edu/z01"
 )
-
-func main() {
-	if len(os.Args) < 1 {
+func main(){
+	if len(os.Args) < 2{
 		return
 	}
-
-	args := os.Args[1:]
-	// res := ""
-
-	for _, str := range args {
-		fmt.Println(RevStrCap(str))
+	slice := os.Args[1:]
+	for _, str := range slice{
+		result := ReverseStrCap(str)
+		fmt.Println(result)
 	}
-	// fmt.Println(res)
 }
 
-func RevStrCap(s string) string {
+func ReverseStrCap(s string)string{
 	result := ""
-	for i, c := range s {
-		if i != len(s)-1 {
-			if Up(c) && s[i+1] != ' ' {
-				result += string(c + 32)
-			} else if Low(c) && s[i+1] == ' ' {
-				result += string(c - 32)
-			} else {
-				result += string(c)
+	for i, ch := range s{ 
+		if i < len(s)- 1{
+			if ToUpper(ch) && s[i +1]!= ' '{
+				result += string(ch + 32)
+			}else if Tolower(ch) && s[i+1] == ' '{
+				result += string(ch-32)
+			}else{
+				result += string(ch)
 			}
-		} else {
-			if i == len(s)-1 && Low(c) {
-				result += string(c - 32)
-			} else {
-				result += string(c)
-			}
+		}else if Tolower(ch) && i == len(s)-1{
+			result += string(ch-32)
+		}else{
+			result += string(ch)
 		}
-	}
-
-	return result
+		}
+		return result
 }
 
-func Low(s rune) bool {
-	return s >= 'a' && s <= 'z'
+func Tolower(r rune)bool{
+	return r >= 'a' && r <= 'z'
 }
 
-func Up(s rune) bool {
-	return s >= 'A' && s <= 'Z'
+func ToUpper(r rune)bool{
+	return r >= 'A' && r <= 'Z'
 }
