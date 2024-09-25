@@ -25,8 +25,8 @@
 package main
 
 import (
-	"fmt"
 	"os"
+
 	"github.com/01-edu/z01"
 )
 
@@ -41,7 +41,7 @@ func main() {
 	str := os.Args[1]
 	num := Atoi(str)
 	fprime := FPrime(num)
-	fmt.Println(fprime)
+	// fmt.Println(fprime)
 	factorz := ""
 	for _, ch := range fprime {
 		factorz += Itoa(ch) + "*"
@@ -104,12 +104,11 @@ func Itoa(n int) string {
 func FPrime(n int) []int {
 	factors := []int{}
 	for i := 2; i <= n; {
-		if IsPrime(i) && n%i == 0 {
+		for n%i == 0 && IsPrime(i) {
 			factors = append(factors, i)
 			n = n / i
-		} else {
-			i++
 		}
+		i++
 	}
 	return factors
 }
