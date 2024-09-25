@@ -110,7 +110,7 @@ for _, ch := range str{
 }
 result := ""
 if check{
-	for i := 0; i < len(str)-1; i++{
+	for i := 0; i < len(str)-1; i--{
 		if str[i] != ' '{
 			result += string(str[i])
 		}else if result != ""{
