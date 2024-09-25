@@ -35,38 +35,74 @@
 // [[0 1 2 3] [4 5 6 7]]
 // $
 
-
 package main
 
 import (
 	"fmt"
+
+	"github.com/01-edu/go-tests/lib/challenge"
+	"github.com/01-edu/go-tests/lib/random"
+	"github.com/01-edu/go-tests/solutions"
 )
 
-func main() {
-	Chunk([]int{}, 10)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 0)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 3)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 5)
-	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 4)
-	Chunk([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3)
+func randomSize() []int {
+	var randSlice []int
+	for i := 0; i <= random.IntBetween(0, 20); i++ {
+		randSlice = append(randSlice, random.Int())
+	}
+	return randSlice
 }
-func Chunk(slice []int, size int){
-	if size == 0 {
+
+func main() {
+	type node struct {
+		slice []int
+		ch    int
+	}
+	args := []node{
+		{
+			slice: []int{},
+			ch:    0,
+		}, {
+			slice: []int{1, 2, 3, 4, 5, 6, 7, 8},
+			ch:    0,
+		},
+	}
+
+	for i := 0; i <= 7; i++ {
+		value := node{
+			slice: randomSize(),
+			ch:    random.IntBetween(0, 10),
+		}
+		args = append(args, value)
+	}
+	for _, arg := range args {
+		challenge.Function("Chunk", Chunk, solutions.Chunk, arg.slice, arg.ch)
+	}
+}
+
+func Chunk(slice []int, size int) {
+	chunked := [][]int{}
+
+	if size == 0{
 		fmt.Println()
 		return
 	}
-	if len(slice) == 0 {
-		fmt.Println([][]int{})
-		return
-	}
-	chunked := [][]int{}
-	for i := 0; i < len(slice); i = i + size {
+
+	for i := 0; i < len(slice); i += size{
 		end := i + size
-		if end > len(slice) {
+
+		if end > len(slice){
 			end = len(slice)
 		}
-		chunked = append(chunked, slice[i:end])
+		chunked = append(chunked,slice[i:end])
 	}
-	fmt.Println(chunked) 
+	fmt.Println(chunked)
 }
 
+// func main() {
+// 	Chunk([]int{}, 10)
+// 	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 0)
+// 	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 3)
+// 	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 5)
+// 	Chunk([]int{0, 1, 2, 3, 4, 5, 6, 7}, 4)
+// }
