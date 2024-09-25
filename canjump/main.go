@@ -8,7 +8,6 @@
 
 // Let's take the example array input := []uint{2, 3, 1, 1, 4}.
 
-
 // Position: 0  1  2  3  4
 // Steps:    2  3  1  1  4
 //           ^
@@ -63,52 +62,57 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"reflect"
 )
 
 func main() {
-	input1 := []uint{2, 3, 1, 1, 4}
-	fmt.Println(CanJump(input1))
+	tests := []struct {
+		args []uint
+		want bool
+	}{
+		{args: []uint{2, 3, 1, 1, 4}, want: true},
+		{args: []uint{1, 1, 1, 1, 0}, want: true},
+		{args: []uint{5, 4, 3, 2, 1, 0}, want: true},
+		{args: []uint{0}, want: true},
+		{args: []uint{5}, want: true},
+		{args: []uint{}, want: false},
+		{args: []uint{1, 2, 3, 0, 2}, want: false},
+		{args: []uint{3, 2, 1, 0, 4}, want: false},
+		{args: []uint{0, 0, 0, 0, 0}, want: false},
+		{args: []uint{1, 2, 3}, want: false},
+		{args: []uint{1, 2, 3, 0, 1}, want: false},
+		{args: []uint{1, 0, 0, 0, 0}, want: false},
+		{args: []uint{1, 0, 1, 0, 1}, want: false},
+		{args: []uint{10, 20, 30, 40, 0}, want: false},
+	}
 
-	input2 := []uint{3, 2, 1, 0, 4}
-	fmt.Println(CanJump(input2))
-
-	input3 := []uint{0}
-	fmt.Println(CanJump(input3))
-
-
-	input4 := []uint{0, 0, 0, 0, 0, 0}
-	fmt.Println(CanJump(input4))
-
-
-	input5 := []uint{5, 4, 3, 2, 1, 0}
-	fmt.Println(CanJump(input5))
+	for _, tc := range tests {
+		got := CanJump(tc.args)
+		if !reflect.DeepEqual(got, tc.want) {
+			log.Fatalf("%s(%+v) == %+v instead of %+v\n",
+				"CanJump",
+				tc.args,
+				got,
+				tc.want,
+			)
+		}
+	}
 }
 
-func CanJump(nb []uint)bool{
-	if len(nb)== 0{
-		return false
-	}
+func CanJump(nb []uint) bool {
 	if len(nb) == 1{
 		return true
 	}
+	for i:= 0; i < len(nb);{
+		steps := int(nb[i])
 
-	sum := 0
-	for i := 0; i < len(nb); i++{
-		sum+= int(nb[i])
-	}
-	if sum == 0{
-		return true
-	}else{
-		start := int(nb[0])
-		for i := 0; i < len(nb)-1;{
-			if start == 0{
-				return false
-			}
-			i+=start
-			if i == len(nb)-1{
-				return true
-			}
+		if steps == 0{
+			return false
+		}
+		i+=steps
+		if i == len(nb)-1{
+			return true
 		}
 	}
 	return false
