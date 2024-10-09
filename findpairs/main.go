@@ -36,28 +36,87 @@
 // Invalid input.
 // $
 
-
 package main
 
-import(
-"fmt"
+import (
+	"fmt"
+	"os"
+	"strconv"
 )
 
-func main(){
-	fmt.Println(Paired([]int{1, 2, 3, 4, 5}, 6))
+func main() {
+	// fmt.Println(ParseInput(""))
+	args := os.Args
+	if len(args) != 3 {
+		fmt.Println("invalid input")
+		return
+	}
+	input := ParseInput(args[1])
+	target, err := strconv.Atoi(args[2])
+	if err != nil {
+		fmt.Println("Invalid target sum")
+		os.Exit(0)
+	}
+
+	pairs := Pairs(input, target)
+	if len(pairs) > 0 {
+		fmt.Printf("Pairs with sum % d: %v\n", target, pairs)
+	} else {
+		fmt.Println("No Pairs Found")
+	}
 }
 
-func Paired(slice []int, target int)[][]int{
-	pairs :=[][]int{}
-	mapped := make(map[int]int)
+func Sep(s, sep string) []string {
+	lensep := len(sep)
+	start := 0
+	result := []string{}
 
-	for _, ch := range slice{
-		mapped[ch]++
+	for i := 0; i < len(s)-lensep; i++ {
+		if s[i:i+lensep] == sep {
+			result = append(result, s[start:i])
+
+			start = i + lensep
+		}
 	}
-	 for i, _ := range slice{
-		if i < len(slice) && slice[i] + slice[i+1] == target{
-			pairs = append(pairs,[]int{i,i+1})
-		} 
-	 }
-	 return pairs
-}/
+	if start <= len(s)-1 {
+		result = append(result, s[start:])
+	}
+	// fmt.Println(result)
+	return result
+
+}
+
+func Pairs(n []int, target int) [][]int {
+	result := [][]int{}
+	for i := 0; i < len(n); i++ {
+		for j := i + 1; j < len(n); j++ {
+			if n[i]+n[j] == target {
+				result = append(result, []int{i, j})
+			}
+		}
+	}
+	return result
+}
+
+func ParseInput(input string)[]int{
+	result := []int{}
+	if len(input) < 3 || input[0] != '[' || input[len(input)-1] != ']'{
+		fmt.Println("Invalid input.")
+		os.Exit(0)
+	}else{
+		input = input[1:len(input)-1]
+	}
+	// fmt.Println(input)
+	input2 := Sep(input,", ")
+	// fmt.Println(input2)
+	for _, value := range input2{
+		num,err := strconv.Atoi(string(value))
+		if err != nil{
+			fmt.Printf("Invalid number: %v\n", value )
+			os.Exit(0)
+		}
+		result = append(result,num)
+	}
+	// fmt.Println(result)
+	return result
+}
