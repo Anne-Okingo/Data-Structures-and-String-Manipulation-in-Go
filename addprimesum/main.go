@@ -24,72 +24,43 @@
 package main
 
 import (
+	// "fmt"
 	"os"
 
 	"github.com/01-edu/z01"
 )
 
 func main() {
+
 	args := os.Args
 	if len(args) != 2 {
 		z01.PrintRune('0')
 		z01.PrintRune('\n')
 		return
 	}
-	str := args[1]
-	num := Atoi(str)
-	sum := PrimeSum(num)
-	result := Itoa(sum)
-	for _, ch := range result{
-		z01.PrintRune(ch)
+
+	num := Atoi(args[1])
+	if num < 0{
+		z01.PrintRune('0')
+		z01.PrintRune('\n')
+		return
+	}
+	// fmt.Println(num)
+	result := PrimeSum(num)
+
+	results := Itoa(result)
+// fmt.Println(results)
+	for _, v := range results {
+		z01.PrintRune(v)
 	}
 	z01.PrintRune('\n')
-}
-
-func Atoi(s string) int {
-	multiplier := 1
-	result := 0
-
-	if s[0] == '-' {
-		multiplier = -1
-		s = s[1:]
-	} else if s[0] == '+' {
-		multiplier = 1
-		s = s[1:]
-	}
-	for _, ch := range s {
-		if ch < '0' || ch > '9' {
-			continue
-		} else {
-			result = result*10 + int(ch-'0')
-		}
-	}
-	return multiplier * result
-}
-
-func Itoa(n int) string {
-	if n == 0 {
-		return "0"
-	}
-
-	sign := ""
-	if n < 0 {
-		sign = "-"
-		n = n * -1
-	}
-
-	result := ""
-	for n > 0 {
-		result = string(n%10 + '0') + result
-		n /= 10
-	}
-	return sign + result
 }
 
 func IsPrime(n int) bool {
 	if n < 2 {
 		return false
 	}
+
 	for i := 2; i < n; i++ {
 		if n%i == 0 {
 			return false
@@ -98,13 +69,60 @@ func IsPrime(n int) bool {
 	return true
 }
 
-	func PrimeSum(n int)int{
-		sum := 0
-		for i := 0;i < n; i++{
-			if IsPrime(i){
-				sum +=i
-			}
+func PrimeSum(n int) int {
+	sum := 0
+
+	for i := 0; i <= n; i++ {
+		if IsPrime(i) {
+			sum += i
 		}
-		return sum
+	}
+	return sum
+}
+
+func Atoi(s string) int {
+
+	multiplier := 1
+
+	for i, ch := range s {
+		if ch == '-' && i == 0 {
+			multiplier = -1
+			s= s[1:]
+		}
+		if ch == '+' && i == 0 {
+			multiplier = 1
+			s= s[1:]
+		}
+	}
+	result := 0
+
+	for _, v := range s {
+		// if !(v >= '0' && v <= '9') {
+		// 	z01.PrintRune('0' + '\n')
+		// 	os.Exit(0)
+		// }
+		result = result*10 + int(v-'0')
+	}
+	return result * multiplier
+}
+
+func Itoa(n int) string {
+	sign := ""
+	result := ""
+	if n < 0 {
+		sign = "-"
+		n = -n
 	}
 
+	for n != 0 {
+		startrne := '0'
+		mod := n % 10
+		for i := 0; i < mod; i++ {
+			startrne++
+		}
+		result = string(startrne) + result
+		n /= 10
+	}
+
+	return sign + result
+}
