@@ -89,34 +89,38 @@ package main
 
 import (
 	"fmt"
-	// "piscine"
-	// "github.com/01-edu/z01"
+	"os"
 )
 
 func main() {
-	fmt.Print(LastWord("this        ...       is sparta, then again, maybe    not           "))
-	fmt.Print(LastWord(" lorem,ipsum "))
-	fmt.Print(LastWord(" "))
-}
+	args := os.Args[1:]
 
-
-func LastWord(str string)string{
-check := false
-for _, ch := range str{
-	if ch != ' '{
-		check = true
-		break
+	if len(args) != 1 || args[0] == "" {
+		return
 	}
-}
-result := ""
-if check{
-	for i := 0; i < len(str)-1; i--{
-		if str[i] != ' '{
-			result += string(str[i])
-		}else if result != ""{
+
+	result := ""
+	str := args[0]
+
+	check := false
+
+	for _, c := range str {
+		if c != ' ' {
+			check = true
 			break
 		}
 	}
+
+	if check {
+		for i := len(str) - 1; i >= 0; i-- {
+			if str[i] != ' ' {
+				result = string(str[i]) + result
+			} else if result != "" {
+				break
+			}
+		}
+	}
+
+	fmt.Println(result)
 }
-return result + "\n"
-}
+
